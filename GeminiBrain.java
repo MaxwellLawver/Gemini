@@ -56,12 +56,20 @@ public class GeminiBrain {
             }
         }
         if (input.equalsIgnoreCase("speak in pig latin")) {
-            pigLatin = true;
-            return "Okay.";
+            if (!pigLatin) {
+                pigLatin = true;
+                return "Okay.";
+            } else {
+                return "I'm already speaking in Pig Latin.";
+            }
         }
         if (input.equalsIgnoreCase("stop speaking in pig latin")) {
-            pigLatin = false;
-            return "Okay.";
+            if (pigLatin) {
+                pigLatin = false;
+                return "Okay.";
+            } else {
+                return "I wasn't speaking in Pig Latin.";
+            }
         }
         return "...";
     }
