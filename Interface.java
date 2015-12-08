@@ -19,7 +19,7 @@ public class Interface {
                     break;
                 }
             } else {
-                System.out.println(gemini.name() + ": " + gemini.respond(input));
+                System.out.println(gemini.name() + ": " + gemini.responseHandler(input));
             }
         }
     }

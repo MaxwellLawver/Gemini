@@ -20,8 +20,13 @@ public class KnowledgeNumber extends KnowledgeEntry {
          s = s.toLowerCase();
          if (s.equals("square root")) {
              return new KnowledgeNumber(Math.sqrt(this.value));
+         } else if (s.equals("cube root")) {
+             return new KnowledgeNumber(Math.cbrt(this.value));
+         } else if (s.equals("absolute value")) {
+             return new KnowledgeNumber(Math.abs(this.value));
+         } else {
+             return super.property(s);
          }
-         return null;
     }
     
 }

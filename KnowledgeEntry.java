@@ -62,9 +62,9 @@ public class KnowledgeEntry {
             String[] splat = key.split(" ");
             for (int i=0;i<splat.length;i++) {
                 if (splat[i].endsWith("'s")) {
-                    String subkey = Gland.spaceOutArray(splat, i + 1);
+                    String subkey = WordGland.spaceOutArray(splat, i + 1);
                     splat[i] = splat[i].substring(0, splat[i].length() - 2);
-                    String prekey = Gland.spaceOutArray(splat, 0, i + 1);
+                    String prekey = WordGland.spaceOutArray(splat, 0, i + 1);
                     if (hasProperty(prekey)) {
                         return property(prekey).property(subkey);
                     }

@@ -5,6 +5,7 @@ public class GeminiBrain {
     private String name;
     private KnowledgeEntry self;
     private KnowledgeEntry user;
+    private boolean pigLatin = false;
     
     public GeminiBrain() {
          name = "Gemini";
@@ -15,35 +16,52 @@ public class GeminiBrain {
         return name;
     }
     
+    public String responseHandler(String input) {
+        String response = respond(input);
+        if (pigLatin) {
+            return WordGland.capitalize(WordGland.pigLatin(response)) + ".";
+        } else {
+            return response;
+        }
+    }
+    
     public String respond(String input) {
-        input = Gland.stripPunctuation(input);
+        input = WordGland.stripPunctuation(input);
         String[] splitInput = input.split(" ");
-        if (Gland.isQuestionWord(splitInput[0]) && Gland.isBe(splitInput[1]) && splitInput.length > 2) { //handle "what is ______" questions
+        if (WordGland.isQuestionWord(splitInput[0]) && WordGland.isBe(splitInput[1]) && splitInput.length > 2) { //handle "what is ______" questions
             //check for my/yours
             if (splitInput[2].equalsIgnoreCase("your")) {
-                String key = Gland.spaceOutArray(Arrays.copyOfRange(splitInput, 3, splitInput.length));
+                String key = WordGland.spaceOutArray(Arrays.copyOfRange(splitInput, 3, splitInput.length));
                 if (self.hasProperty(key)) {
-                    return "My " + key + " " + Gland.properBe(self.property(key)) + " " + self.property(key).value() + ".";
+                    return "My " + key + " " + WordGland.properBe(self.property(key)) + " " + self.property(key).value() + ".";
                 } else {
                     return "I don't have a " + key + ".";
                 }
             } else if (splitInput[2].equalsIgnoreCase("my")) {
-                String key = Gland.spaceOutArray(Arrays.copyOfRange(splitInput, 3, splitInput.length));
+                String key = WordGland.spaceOutArray(Arrays.copyOfRange(splitInput, 3, splitInput.length));
                 if (self.hasProperty(key)) {
-                    return "Your " + user.property(key).name() + " " + Gland.properBe(user.property(key)) + " " + user.property(key).value() + ".";
+                    return "Your " + user.property(key).name() + " " + WordGland.properBe(user.property(key)) + " " + user.property(key).value() + ".";
                 } else {
                     return "I don't know your " + key + ".";
                 }
             } else {
-                String key = Gland.spaceOutArray(Arrays.copyOfRange(splitInput, 2, splitInput.length));
+                String key = WordGland.spaceOutArray(Arrays.copyOfRange(splitInput, 2, splitInput.length));
                 if (knowledge.containsKey(key)) {
-                    return Gland.capitalize(key) + " " + Gland.properBe(knowledge.get(key)) + " " + knowledge.get(key).value() + ".";
-                } else if (Gland.isEquation(key)) {
-                    return Gland.capitalize(key) + " is " + SmartGland.process(key) + ".";
+                    return WordGland.capitalize(key) + " " + WordGland.properBe(knowledge.get(key)) + " " + knowledge.get(key).value() + ".";
+                } else if (WordGland.isEquation(key)) {
+                    return WordGland.capitalize(key) + " is " + SmartGland.process(key) + ".";
                 } else {
                     return "I don't know anything about " + key + ".";
                 }
             }
+        }
+        if (input.equalsIgnoreCase("speak in pig latin")) {
+            pigLatin = true;
+            return "Okay.";
+        }
+        if (input.equalsIgnoreCase("stop speaking in pig latin")) {
+            pigLatin = false;
+            return "Okay.";
         }
         return "...";
     }
