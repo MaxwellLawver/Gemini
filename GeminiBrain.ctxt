@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=GeminiBrain()
+comment1.params=
+comment1.target=java.lang.String\ name()
+comment2.params=input
+comment2.target=java.lang.String\ respond(java.lang.String)
+comment3.params=s
+comment3.target=void\ tellUserName(java.lang.String)
+comment4.params=
+comment4.target=void\ memInit()
+numComments=5

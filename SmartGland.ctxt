@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=e
+comment0.target=double\ process(java.lang.String)
+comment1.params=d1\ d2\ c
+comment1.target=double\ calculate(double,\ double,\ char)
+numComments=2
