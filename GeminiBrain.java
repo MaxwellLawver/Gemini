@@ -38,6 +38,8 @@ public class GeminiBrain {
                 String key = Gland.spaceOutArray(Arrays.copyOfRange(splitInput, 2, splitInput.length));
                 if (knowledge.containsKey(key)) {
                     return Gland.capitalize(key) + " " + Gland.properBe(knowledge.get(key)) + " " + knowledge.get(key).value() + ".";
+                } else if (Gland.isEquation(key)) {
+                    return Gland.capitalize(key) + " is " + SmartGland.process(key) + ".";
                 } else {
                     return "I don't know anything about " + key + ".";
                 }
