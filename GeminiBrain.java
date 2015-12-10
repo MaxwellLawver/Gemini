@@ -6,6 +6,8 @@ public class GeminiBrain {
     private KnowledgeEntry self;
     private KnowledgeEntry user;
     private boolean pigLatin = false;
+    private boolean backwards = false;
+    private boolean rot13 = false;
     
     public GeminiBrain() {
          name = "Gemini";
@@ -19,10 +21,15 @@ public class GeminiBrain {
     public String responseHandler(String input) {
         String response = respond(input);
         if (pigLatin) {
-            return WordGland.capitalize(WordGland.pigLatin(response)) + ".";
-        } else {
-            return response;
+            response = WordGland.capitalize(WordGland.pigLatin(response)) + ".";
         }
+        if (backwards) {
+            response = WordGland.capitalize(WordGland.backwards(response)) + ".";
+        }
+        if (rot13) {
+            response = WordGland.capitalize(WordGland.rot13(response));
+        }
+        return response;
     }
     
     public String respond(String input) {
@@ -69,6 +76,38 @@ public class GeminiBrain {
                 return "Okay.";
             } else {
                 return "I wasn't speaking in Pig Latin.";
+            }
+        }
+        if (input.equalsIgnoreCase("speak backwards")) {
+            if (!backwards) {
+                backwards = true;
+                return "Okay.";
+            } else {
+                return "I'm already speaking backwards.";
+            }
+        }
+        if (input.equalsIgnoreCase("stop speaking backwards")) {
+            if (backwards) {
+                backwards = false;
+                return "Okay.";
+            } else {
+                return "I wasn't speaking backwards.";
+            }
+        }
+        if (input.equalsIgnoreCase("speak in rot13")) {
+            if (!rot13) {
+                rot13 = true;
+                return "Okay.";
+            } else {
+                return "I'm already speaking in ROT13.";
+            }
+        }
+        if (input.equalsIgnoreCase("stop speaking in rot13")) {
+            if (rot13) {
+                rot13 = false;
+                return "Okay.";
+            } else {
+                return "I wasn't speaking in ROT13.";
             }
         }
         return "...";
